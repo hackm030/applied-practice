@@ -22,6 +22,8 @@ storms_new <- read_csv("StormEvents_details-ftp_v1.0_dyear_cdate.csv")
 # Define data-cleaning function
 cleanWeatherData <- function(data) {
   data %>%
+    # Remove this column to shrink file size
+    select(-EPISODE_NARRATIVE) %>%
     filter(STATE %in% c("NORTH DAKOTA", "SOUTH DAKOTA", "NEBRASKA",
                         "IOWA", "MINNESOTA", "WISCONSIN")) %>%
     separate(col = DAMAGE_PROPERTY, into = c("PROP_DAM_NUM", "PROP_DAM_UNIT"), sep = -1, remove = FALSE) %>%
